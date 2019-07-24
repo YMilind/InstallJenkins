@@ -1,0 +1,29 @@
+sudo yum update -y
+Download the latest Jenkins code package.
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
+            
+Import a key file from Jenkins-CI to enable installation from the package.
+
+sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+           
+Install Jenkins.
+
+sudo yum install jenkins -y
+Start Jenkins as a service.
+
+sudo service jenkins start
+Configure Jenkins, now that it’s installed and running on your Amazon EC2 instance. Use its management interface at port 80 or 8080, or remotely access the server via SSH. In its default configuration, Jenkins versions 2.0 and later lock down access to the management interface.
+
+The first time you use the dashboard at http://your-server-address:8080, you will be prompted to unlock Jenkins:
+
+
+              Unlock Jenkins
+              
+            
+Figure: Unlock Jenkins
+As noted on the user interface, you can find this password in /var/lib/jenkins/secrets/initialAdminPassword. Paste the value into the password box, then choose Continue.
+
+The installation script directs you to the Customize Jenkins page. Choose Select plugins to install and select any plugins appropriate to your particular installation. For our example, ensure that the Git plugin (under Source Code Management) and SSH Slaves plugin (under Distributed Builds) are installed.
+
+
